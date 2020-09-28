@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div>
+		<p class="para1"> This is the first paragraph.</p>
+	
+		<p class="para2"> This is the second paragraph.</p>
+
+		<p class="para3"> This is the third paragraph.</p>
+	</div>
+
+	<section id="form">
+		<form onsubmit="return false">
+			<input type="text" name="name" id="name" placeholder="Name">
+			<span id="nameF"></span><br/>
+			<input type="email" name="email" id="email" placeholder="Email Id">
+			<span id="emailF"></span><br/>
+			<input type="tel" name="phone" id="phone" placeholder="Phone No.">
+			<span id="phoneF"></span><br/>
+			<input type="date" name="dob" id="dob" placeholder="DOB">
+			<span id="dobF"></span><br/>
+			<input type="submit" name="submit" id="submit" onclick='submit1()'>
+			<input type="submit" name="save" id="save" onclick='validate()' value="Save">
+
+			<div class="result"></div>
+		</form>
+		<div class="save"></div>
+	</section>
+
+	<script>
+
+		function submit1(){
+			var txt;
+			if(confirm("Accept terms and conditions!"))
+				txt="<b>Registration Successfull</b>";
+			else
+				txt="<b>Registration Failed</b>";
+			document.querySelector('.result').innerHTML=txt;
+		}
+		function validate(){
+			var name=document.getElementById("name").value;
+			var email=document.getElementById("email").value;
+			var phone=document.getElementById("phone").value;
+			var dob=document.getElementById("dob").value;
+
+			document.getElementById('nameF').innerHTML="";
+			document.getElementById('emailF').innerHTML="";
+			document.getElementById('phoneF').innerHTML="";
+			document.getElementById('dobF').innerHTML="";
+
+
+			var re= /^[a-z]{3,7}$/;
+			var re1= /^[a-zA-Z0-9.-_]+@[a-zA-Z0.9.-]+\.[a-zA-Z]{2,4}$/;
+			var re2= /^[0-9]{10}$/;
+
+
+			if(!re.test(name))
+				document.getElementById('nameF').innerHTML="Invalid Username";
+
+			else if(!re1.test(email))
+				document.getElementById('emailF').innerHTML="Invalid Mail Id";
+
+			else if(!re2.test(phone))
+				document.getElementById('phoneF').innerHTML="Invalid Phone No.";
+
+			else if(dob=="")
+				document.getElementById('dobF').innerHTML="Invalid Date";
+
+			else{
+				var s="name : "+name+"<br>Email : "+email+"<br>Phone No. : "+phone+"<br>dob : "+dob;
+				document.querySelector(".save").innerHTML=s;
+			}
+
+		}
+
+	</script>
+</body>
+</html>
